@@ -87,8 +87,10 @@ void R_trackName(int* trackIndex, const char** name, int* status) {
     return;
   }
 
-  *name = BB_trackName(*trackIndex);
-  *status = (*name) ? STATUS_SUCCESS : STATUS_ERROR;
+  const char* ret_name = BB_trackName(*trackIndex);
+  if (ret_name)
+    *name = ret_name;
+  *status = (ret_name) ? STATUS_SUCCESS : STATUS_ERROR;
 }
 
 void R_setTrack(const char** name, int* status) {

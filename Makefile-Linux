@@ -11,3 +11,4 @@ libbbcomp.so:
 
 clean:
 	rm -f RProxy.so RProxy.o
+	rm -f logs/*
