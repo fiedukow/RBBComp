@@ -1,4 +1,3 @@
-setwd("/home//fiedukow/repo/rbbcomp/")
 source("RBBComp.R")
 
   # login with demo account - this should grant access to the "trial" track (for testing and debugging)
@@ -9,7 +8,7 @@ source("RBBComp.R")
   # request the tracks available to this user (this is optional)
   numTracks = NumberOfTracks();
   if (numTracks == 0) { print("numberOfTracks() failed") }
-  for (i in 1:numTracks)
+  for (i in 0:(numTracks-1))
   {
     trackname = TrackName(i);
     if (trackname == "") { print("trackName() failed"); }
@@ -34,7 +33,7 @@ source("RBBComp.R")
   if (dim == 0) { print("dimension() failed"); }
   bud = Budget();
   if (bud == 0) { print("budget() failed"); }
-  evals = evaluations();
+  evals = Evaluations();
   if (evals < 0) { print("evaluations() failed"); }
   print(paste0("problem dimension: ", dim));
   print(paste0("problem budget: ", bud));
@@ -47,3 +46,4 @@ source("RBBComp.R")
   bestValue = min(values)
 
   print(paste0("best value: ", bestValue));
+
