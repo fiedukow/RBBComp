@@ -1,0 +1,13 @@
+MODE = -O3 -DNDEBUG
+
+FLAGS = -std=c99 ${MODE} -Wall -fPIC
+
+
+client: RProxy.c libbbcomp.so
+	R CMD SHLIB RProxy.c
+
+libbbcomp.so:
+	echo "You must put libbbcomp.so here to be able to run R code."
+
+clean:
+	rm -f RProxy.so RProxy.o
