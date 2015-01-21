@@ -10,5 +10,5 @@ libbbcomp.so:
 	echo "You must put libbbcomp.so here to be able to run R code."
 
 clean:
-	rm -f RProxy.so RProxy.o
+	rm -f RProxy.o
 	rm -f logs/*
