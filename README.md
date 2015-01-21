@@ -26,3 +26,8 @@ Patches, suggestions and bug reports are kindly welcome. Please use github tools
  * Function names in R API starts with capital letter.
  * The first call from bbcomp in R API should always be Configure - its OBLIGATORY now.
  * There is additional function Logout which acctually only unloads DLL. It's not really usefull unless you are one of those people who keep they R session for years.
+ * Whenever there is a place to put point into API you can put there two things:
+    * Vector representing point with Dimension() length. You will get single double value (value of point) in return.
+    * Matrix representing multiple points with Dimension() columns and 1 or more rows. Each row represents single point. You will get vector of double values (values of consecutive points) in return.
+
+Note, that if C API will return error for some of points only - you will get warning. You can then check which of returned values are equal 1e100 to determine what exacly wasnt calculated properly. Keep in mind that the 1e100 is also value returned by C API if you will try to calculate value for point outside of [0,1]^D range.
