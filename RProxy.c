@@ -30,6 +30,8 @@ void R_init(int* status) {
 
   LIB_BBCOMP = dlopen("libbbcomp.so", RTLD_LAZY);
   if (!LIB_BBCOMP) goto fail;
+  BB_configure = dlsym(LIB_BBCOMP, "configure");
+  if (!BB_configure) goto fail;
   BB_login = dlsym(LIB_BBCOMP, "login");
   if (!BB_login) goto fail;
   BB_numberOfTracks = dlsym(LIB_BBCOMP, "numberOfTracks");
@@ -60,6 +62,15 @@ void R_init(int* status) {
 fail:
   *status = STATUS_ERROR;
   return;
+}
+
+void R_configure(int* history, const char** logPath, int* status) {
+  if (!LIB_BBCOMP || !BB_configure) {
+    *status = STATUS_ERROR;
+    return;
+  }
+
+  *status = (BB_configure(*history, *logPath) != 0) ? STATUS_SUCCESS : STATUS_ERROR;
 }
 
 void R_login(char** log, char** pass, int* status) {
@@ -193,5 +204,18 @@ void R_history(int* index, double* point, double* value, int* data_length, int* 
 
   *status = i;
   return;
+}
+
+void R_errorMessage(const char** msg, int* status) {
+  *status = STATUS_ERROR;
+  if (!LIB_BBCOMP || !BB_errorMessage)
+    return;
+
+  const char* ret_val = BB_errorMessage();
+  if (!ret_val)
+    return;
+
+  *status = STATUS_SUCCESS;
+  *msg = ret_val;
 }
 

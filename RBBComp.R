@@ -1,9 +1,14 @@
-#Configure = function
-Login = function(login, password) {
+Configure = function(historyEnabled, path) {
   dyn.load("RProxy.so", local=FALSE)
   INIT = .C("R_init", status=as.integer(0))
   if (INIT$status == 0)
     return(0)
+
+  CONF = .C("R_configure", history = as.integer(historyEnabled), logPath = as.character(path), status = as.integer(0))
+  return(CONF$status)
+}
+
+Login = function(login, password) {
   LOGIN = .C("R_login", log = as.character(login), pass = as.character(password), status = as.integer(0))
   return(LOGIN$status)
 }
@@ -74,6 +79,13 @@ History = function(index, points) {
   if (HIST$status < N)
     warning("Not all of requested points were calculated correctly.")
   return(HIST$value)
+}
+
+ErrorMessage = function() {
+  MSG = .C("R_errorMessage", msg = as.character(""), status = as.integer(0))
+  if (MSG$status == 0)
+    return("")
+  return(MSG$msg)
 }
 
 # This doesn't really logout - it only unload DLL

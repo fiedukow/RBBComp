@@ -20,3 +20,9 @@ To use those bindigs just follow 2 simple steps:
 # Issue tracking, patches
 
 Patches, suggestions and bug reports are kindly welcome. Please use github tools for all of those :)
+
+# Differences between C API and R API.
+
+ * Function names in R API starts with capital letter.
+ * The first call from bbcomp in R API should always be Configure - its OBLIGATORY now.
+ * There is additional function Logout which acctually only unloads DLL. It's not really usefull unless you are one of those people who keep they R session for years.
