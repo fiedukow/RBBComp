@@ -14,7 +14,7 @@ To use those bindigs just follow 2 simple steps:
 
     $ make -f Makefile-Linux
 
- 2. Put RProxy.so, libbbcomp.so (download binary for your own architecture from http://bbcomp.ini.rub.de) and RBBComp.r in your working directory.
+ 2. Put RProxy.so, libbbcomp.so (download binary for your own architecture from http://bbcomp.ini.rub.de) and RBBComp.r in your LD_LIBRARY_PATH.
  3. Use RRBComp.r API in a way described in bbcomp official documentation for C. Note, that you can pass matrices containing more then one point to evaluate multiple points with one call (you will get vector of values in return).
 
 # Issue tracking, patches
