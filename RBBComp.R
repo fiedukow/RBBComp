@@ -67,7 +67,7 @@ Evaluations = function() {
 
 Evaluate = function(points) {
   N = max(1, nrow(points))
-  EVAL = .C("R_evaluate", point = as.double(points), value = as.double(rep(1e100, N)), data_length=length(points), status = as.integer(0))
+  EVAL = .C("R_evaluate", point = as.double(t(points)), value = as.double(rep(1e100, N)), data_length=length(points), status = as.integer(0))
   if (EVAL$status < N)
     warning("Not all of requested points were calculated correctly.")
   return(EVAL$value)
